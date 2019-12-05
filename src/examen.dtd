@@ -1,0 +1,65 @@
+<?xml encoding="utf-8" ?>
+
+<!-- Elementos que puede contener la prosa:
+     i:      cursiva
+	  b:      negrita
+	  tt:     monoespaciada 
+	  e:      exponente. p.e. 2^3
+	  jerga:  palabra técnica                 -->
+<!ENTITY % prosa "(#PCDATA|e|i|b|tt|sup|sub|jerga)*" >
+<!ELEMENT i %prosa;>
+<!ELEMENT b %prosa;>
+<!ELEMENT tt %prosa;>
+<!ELEMENT sup %prosa;>
+<!ELEMENT sub %prosa;>
+<!ELEMENT e (#PCDATA)>
+<!ELEMENT jerga %prosa;>
+
+<!ELEMENT examen (datos,texto)>
+<!ATTLIST examen id IDREF #REQUIRED>
+
+<!ELEMENT datos (examinando,examinador,prueba,calificacion)>
+	<!-- Identidad del alumno examinado -->
+	<!ELEMENT examinando (apellidos,nombre,curso)>
+		<!ELEMENT apellidos (#PCDATA)>
+		<!ELEMENT nombre    (#PCDATA)>
+		<!ELEMENT curso     (#PCDATA)>
+	<!ELEMENT examinador (apellidos,nombre,centro)>
+		<!ELEMENT centro (#PCDATA)>
+	<!-- Datos sobre la prueba -->
+	<!ELEMENT prueba (asignatura,evaluacion,grupo,fecha)>
+		<!ELEMENT asignatura (#PCDATA)>
+		<!ELEMENT evaluacion EMPTY>
+			<!ATTLIST evaluacion cual CDATA #REQUIRED
+										numero CDATA #REQUIRED>
+		<!ELEMENT grupo (#PCDATA)>
+		<!ELEMENT fecha EMPTY>
+			<!ATTLIST fecha dia CDATA #REQUIRED
+								 mes CDATA #REQUIRED
+								 anno CDATA #REQUIRED>
+	<!-- Resultado del examen -->
+	<!ELEMENT calificacion (observaciones,nota)>
+		<!-- Por si se quiere incluir alguna observación al examen corregido -->
+		<!ELEMENT observaciones (#PCDATA) >
+		<!ELEMENT nota (#PCDATA)>
+
+<!ELEMENT texto (nota_previa,(parte+|cuestion+))>
+	<!ELEMENT nota_previa (leyenda,item+)>
+		<!ELEMENT leyenda %prosa;>
+		<!ELEMENT item %prosa;>
+	<!ELEMENT parte (cuestion+)>
+		<!-- suma es la puntación de la pregunta si es acertada -->
+		<!-- resta es la puntuación de la pregunta si es errónea (test) -->
+		<!ATTLIST parte desc CDATA #IMPLIED
+                      suma  CDATA #REQUIRED
+                      resta CDATA #IMPLIED
+                      peso CDATA #IMPLIED>
+	<!ELEMENT cuestion (pregunta,respuesta*,borrador?)>
+      <!ATTLIST cuestion tipo  (simple|multi|libre) #REQUIRED>
+		<!ELEMENT pregunta %prosa;>
+		<!ELEMENT respuesta %prosa;>
+		<!-- borrador sirve para crear un recuadro en la pregunta, que
+			  sirva al alumno para hacer cuentas -->
+			<!ATTLIST respuesta es (correcta|incorrecta) "incorrecta">
+		<!ELEMENT borrador EMPTY>
+			<!ATTLIST borrador espacio CDATA #REQUIRED>

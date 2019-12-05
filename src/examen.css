@@ -1,0 +1,169 @@
+header table {
+   border: medium solid black;
+   width: 100%;
+   empty-cells: show; 
+   border-collapse: collapse; 
+   table-layout: fixed;
+}
+
+header table td {
+   border: thin solid black;
+   /*padding: 0.45em;*/
+   padding: 0;
+   height: 20px;
+}
+
+header table td textarea {
+   resize: none;
+   padding: 0.45em;
+   border: none;
+   box-sizing: border-box;
+   width: 100%;
+   height: 100%;
+}
+
+header table td textarea:disabled {
+   text-align: center;
+}
+
+header table td textarea::placeholder {
+   text-align: initial;
+}
+
+header table td span.titulo {
+   text-transform: uppercase;
+   font-size: x-small;
+   vertical-align: text-top;
+}
+
+header table tr>th, header table tr>td {
+   vertical-align: text-top;
+}
+
+#nota {
+   margin-top: 1em;
+}
+
+@media screen {
+   #nota {
+      border: dashed thin;
+      width: 80%;
+      margin-left: 10%;
+      padding: 0.25em 0.75em 0.25em 0.75em;
+      background-color: #EEE;
+   }
+}
+
+#nota summary {
+   font-weight: bold;
+   font-variant: small-caps;
+   font-size: large;
+}
+
+@media print {
+   details summary::-webkit-details-marker {
+      display: none;
+   }
+
+   #nota::details-content { display: contents; }
+
+   main h1 button {
+      display: none;
+   }
+}
+
+main h1 {
+   border-bottom: solid thin;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;;
+}
+
+main form>ol>li {
+   margin-bottom: 1.5em;
+}
+
+main form>ol>li>.pregunta {
+   font-style: italic;
+}
+
+main form>ol>li>.pregunta>span.puntuacion {
+   font-style: normal;
+   font-size: smaller;
+   background-color: #EEE;
+}
+
+main form>ol>li>ul>li {
+   list-style-type:none;
+   margin-top: .5em;
+}
+
+.borrador {
+   border: solid thin black;
+   font-size: 1.5em;
+   padding: 0.2em .5em 0.2em .5em;
+}
+
+@media print {
+   .borrador {
+      font-size: 2.5em;
+   }
+}
+
+* {
+   quotes: "\00AB" "\00BB";
+}
+
+span.jerga:before {
+   content: open-quote;
+}
+span.jerga:after {
+   content: close-quote;
+}
+
+ul.test label {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
+ul.test label span {
+   display: inline-block;
+}
+
+ul.test label span:first-of-type {
+   margin-right: 5px;
+}
+
+ul.test label span:first-of-type>span {
+   border: solid thin black;
+   padding: 0.1em .35em;
+   font-family: "Courier New",monospace;
+}
+
+ul.test input {
+   display: none;
+}
+
+ul.test input:checked:not(:disabled) + span,
+ul.test li.correcta input:disabled + span {
+   background-color: #666;
+   font-weight: bold;
+   color: white;
+}
+
+main form>ol>li {
+   page-break-inside: avoid;
+}
+
+textarea.borrador {
+   margin-top: 10px;
+   width: 100%;
+   box-sizing: border-box;
+   border-color: #888;
+}
+
+textarea.borrador::placeholder {
+   font-size: small;
+}
+
