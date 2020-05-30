@@ -544,7 +544,9 @@
                <xsl:message terminate="yes">El tipo de pregunta '<xsl:value-of select="@tipo"/>' no tiene soporte</xsl:message>
             </xsl:otherwise>
          </xsl:choose>
-         <xsl:apply-templates select="borrador" />
+         <xsl:apply-templates select="borrador">
+            <xsl:with-param name="id" select="$id"/>
+         </xsl:apply-templates>
       </li>
    </xsl:template>
 
@@ -604,13 +606,15 @@
 
    <!-- Espacio para borrador o escribir el texto de la respuesta -->
    <xsl:template match="borrador">
+      <xsl:param name="id"/>
+
       <xsl:variable name="leyenda">
          <xsl:choose>
             <xsl:when test="../@tipo='libre'" >Respuesta...</xsl:when>
             <xsl:otherwise>Borrador...</xsl:otherwise>
          </xsl:choose>
       </xsl:variable>
-      <textarea name="{../@id}" class="borrador" rows="{@espacio}" placeholder="{$leyenda}" />
+      <textarea name="{$id}" class="borrador" rows="{@espacio}" placeholder="{$leyenda}" />
    </xsl:template>
 
 
